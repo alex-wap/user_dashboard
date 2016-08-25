@@ -1,0 +1,149 @@
+<html>
+<head>
+	<link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Test App</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="/dashboard">Dashboard</a></li>
+					{% if session['id'] == user.id: %}
+					<li class="active"><a href="#">Profile</a></li>
+					{% else: %}
+					<li><a href="/users/show/{{session['id']}}">Profile</a></li>
+					{% endif %}
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/logout">Log out</a></li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div class="container">
+		<div class="row">
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-success">{{message}}</div>
+				{% endfor %}
+			{% endif %}
+			{% endwith %}
+		<div class="row">
+			<div class="form-group col-sm-12">
+				{% if session['id'] == user.id or session['user_level'] == "admin" :%}
+					<a href="/users/edit/{{user.id}}" class="pull-right"><button class="btn btn-xs btn-primary pull-right">Edit Profile</button></a>
+				{% endif %}	
+				<h1>{{user['first_name']}} {{user['last_name']}}</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-3">
+				<span>Registered at:</span>
+				<br>
+				<span>User ID:</span>
+				<br>
+				<span>Email Address:</span>
+				<br>
+				<span>Description:</span>
+				<br>
+			</div>
+			<div class="form-group col-sm-6">
+				<span>{{user['created_at']}}</span>
+				<br>
+				<span>{{user['id']}}</span>
+				<br>
+				<span>{{user['email']}}</span>
+				<br>
+				<span>{{user['description']}}</span>
+				<br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<h3>Leave a message for {{user['first_name']}}</h3>
+				<form action="/new_message" method="post">
+					<textarea class="form-control" rows="3" name="message"></textarea><br>
+					<input type="hidden" name="id" value="{{session['id']}}">
+					<input type="hidden" name="wall_id" value="{{user.id}}">
+					<input type="submit" value="Post" class="btn btn-primary pull-right">
+				</form>
+			</div>
+		</div>
+		{# messages #}
+		{% for message in messages%}
+		<div class="row">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<span class="pull-right">{{message.created_at.strftime('%b %-d, %Y - %-I:%M %p')}}</span>
+					<h3 class="panel-title">{{message.first_name}} {{message.last_name}} wrote</h3>
+				</div>
+				<div class="panel-body">
+					<p>{{message.message}}</p>
+					{% if session['id'] == message.user_id %}
+					<form action="/message/destroy/{{message.id}}" method="post" class="form-inline">
+						<input type="hidden" name="wall_id" value="{{user.id}}">
+						<input type="submit" value="Delete Message" class="btn btn-xs btn-danger pull-right">
+					</form>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% for comment in comments %}
+		{% if message.id == comment.message_id: %}
+		<div class="row">
+			<div class="col-sm-offset-1 panel panel-success">
+				<div class="panel-heading">
+					<span class="h3 panel-title">{{comment.first_name}} {{comment.last_name}} wrote</span><span class="pull-right">{{comment.created_at.strftime('%b %-d, %Y - %-I:%M %p')}}</span>
+				</div>
+				<div class="panel-body">
+					<p>{{comment.comment}}</p>
+					{% if session['id'] == comment.user_id %}
+					<form action="/comment/destroy/{{comment.id}}" method="post" class="form-inline">
+						<input type="hidden" name="wall_id" value="{{user.id}}">
+						<input type="submit" value="Delete Comment" class="btn btn-xs btn-danger pull-right">
+					</form>
+					<!-- <a href="/comment/destroy/{#comment.id#}" class="text-danger pull-right">&nbsp;-&nbsp;Delete Comment</a> -->
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		{% endfor %}
+		<div class="row">
+			<div class="form-group col-sm-offset-1">
+				<h3>Write a comment</h3>
+				<form action="/new_comment" method="post">
+					<textarea class="form-control" rows="2" name="comment"></textarea><br>
+					<input type="hidden" name="message_id" value="{{message.id}}">
+					<input type="hidden" name="id" value="{{session['id']}}">
+					<input type="hidden" name="wall_id" value="{{user.id}}">
+					<input type="submit" value="Comment" class="btn btn-primary pull-right">
+				</form>
+				<br>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</body>
+</html>
