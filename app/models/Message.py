@@ -18,10 +18,24 @@ class Message(Model):
         self.db.query_db(sql, data)
         return True
 
+    # def get_comments(self,id):
+    #     query = '''SELECT first_name,last_name,messages.id as message_id,messages.user_id,comments.comment,comments.created_at,comments.user_id,messages.wall_id,comments.id FROM users
+    #                 JOIN messages ON users.id=messages.user_id
+    #                 JOIN comments ON messages.id=comments.message_id'''
+    #     data = {'id': id}
+    #     return self.db.query_db(query, data)
+
+    # def get_comments(self,id):
+    #     query = '''SELECT first_name,last_name,messages.id as message_id,messages.user_id,comments.comment,comments.created_at,comments.user_id,messages.wall_id,comments.id from comments 
+    #                 JOIN messages ON messages.id = comments.message_id
+    #                 JOIN users ON users.id = messages.user_id WHERE comments.user_id =5'''
+    #     data = {'id': id}
+    #     return self.db.query_db(query, data)
+
     def get_comments(self,id):
-        query = '''SELECT first_name,last_name,messages.id as message_id,messages.user_id,comments.comment,comments.created_at,comments.user_id,messages.wall_id,comments.id FROM users
-                    JOIN messages ON users.id=messages.user_id
-                    JOIN comments ON messages.id=comments.message_id'''
+        query = '''SELECT first_name,last_name, comments.comment, comments.user_id,comments.created_at,comments.wall_id,comments.message_id,comments.id FROM users
+                JOIN comments ON users.id = comments.user_id 
+                JOIN messages ON messages.id = comments.message_id'''
         data = {'id': id}
         return self.db.query_db(query, data)
 
