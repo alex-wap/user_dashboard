@@ -82,6 +82,9 @@
 							</select><br>
 						{% endif %}
 					{% endif %}
+					{% if session['user_level']== 'normal': %}
+					<input type="hidden" name="user_level" value="normal">
+					{% endif %}
 					<input type="hidden" name="update" value="email">
 					<input type="hidden" name="id" value="{{user.id}}">
 					<input type="submit" value="Save" class="btn btn-primary pull-right">

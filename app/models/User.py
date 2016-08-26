@@ -93,12 +93,8 @@ class User(Model):
 
     def update_user(self,data):
         if data['update'] == 'email':
-            if data['user_level']=='normal' or data['user_level']=='admin':
-                query = '''UPDATE users SET email=:email, first_name=:first_name, last_name=:last_name, user_level=:user_level 
-                        WHERE id=:id'''
-            else:
-                query = '''UPDATE users SET email=:email, first_name=:first_name, last_name=:last_name 
-                        WHERE id=:id'''
+            query = '''UPDATE users SET email=:email, first_name=:first_name, last_name=:last_name, user_level=:user_level 
+                    WHERE id=:id'''
         elif data['update'] == 'password':
             # update password
             password = data['password']
@@ -116,7 +112,11 @@ class User(Model):
         return self.db.query_db(query, data)
 
     def destroy_user(self, id):
-        query = "DELETE FROM users where id = :id LIMIT 1"
+        comments = "DELETE FROM comments where user_id = :id"
         data = {"id" : id }
-        self.db.query_db(query,data)
+        self.db.query_db(comments,data)
+        messages = "DELETE FROM messages where user_id = :id"
+        self.db.query_db(messages,data)
+        users = "DELETE FROM users where id = :id LIMIT 1"
+        self.db.query_db(users,data)
         return True
