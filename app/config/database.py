@@ -15,7 +15,7 @@ class DevelopmentDBConfig(DBConfig):
     DB_USERNAME = 'bafc34af816ab9'
     DB_PASSWORD = '350f9484'
     DB_DATABASE_NAME = 'dashboard'
-    DB_HOST = 'localhost'
+    DB_HOST = '127.0.0.1'
     DB_PORT = 8889
     # """ unix_socket is used for connecting with MAMP. Take this out if you aren't using MAMP """
     DB_OPTIONS = {
@@ -27,11 +27,11 @@ class StagingDBConfig(DBConfig):
     DB_USERNAME = 'bafc34af816ab9'
     DB_PASSWORD = '350f9484'
     DB_DATABASE_NAME = 'dashboard'
-    DB_HOST = 'localhost'
+    DB_HOST = '127.0.0.1'
 
 """ Put Production Specific Configurations here """
 class ProductionDBConfig(DBConfig):
     DB_USERNAME = 'bafc34af816ab9'
     DB_PASSWORD = '350f9484'
     DB_DATABASE_NAME = 'dashboard'
-    DB_HOST = 'localhost'
+    DB_HOST = '127.0.0.1'
