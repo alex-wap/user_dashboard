@@ -13,3 +13,4 @@ wheel
 sqlalchemy-utils
 mysqlclient
 # wsgi add for deployment
+gunicorn==19.6.0

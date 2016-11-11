@@ -13,3 +13,4 @@ wheel
 sqlalchemy-utils
 MySQL-python
 uwsgi
+gunicorn==19.6.0
