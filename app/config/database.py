@@ -16,7 +16,7 @@ class DevelopmentDBConfig(DBConfig):
     DB_PASSWORD = '350f9484'
     DB_DATABASE_NAME = 'dashboard'
     DB_HOST = '127.0.0.1'
-    DB_PORT = 8889
+    DB_PORT = 3306
     # """ unix_socket is used for connecting with MAMP. Take this out if you aren't using MAMP """
     DB_OPTIONS = {
         # 'unix_socket': '/Applications/MAMP/tmp/mysql/mysql.sock'
