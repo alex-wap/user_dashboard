@@ -12,8 +12,8 @@ class DBConfig(object):
 
 """ Put Development Specific Configurations here """
 class DevelopmentDBConfig(DBConfig):
-    DB_USERNAME = 'bafc34af816ab9'
-    DB_PASSWORD = '350f9484'
+    DB_USERNAME = 'root'
+    DB_PASSWORD = 'root'
     DB_DATABASE_NAME = 'dashboard'
     DB_HOST = 'localhost'
     DB_PORT = 3306
@@ -24,14 +24,14 @@ class DevelopmentDBConfig(DBConfig):
 
 """ Put Staging Specific Configurations here """
 class StagingDBConfig(DBConfig):
-    DB_USERNAME = 'bafc34af816ab9'
-    DB_PASSWORD = '350f9484'
+    DB_USERNAME = 'root'
+    DB_PASSWORD = 'root'
     DB_DATABASE_NAME = 'dashboard'
     DB_HOST = 'localhost'
 
 """ Put Production Specific Configurations here """
 class ProductionDBConfig(DBConfig):
-    DB_USERNAME = 'bafc34af816ab9'
-    DB_PASSWORD = '350f9484'
+    DB_USERNAME = 'root'
+    DB_PASSWORD = 'root'
     DB_DATABASE_NAME = 'dashboard'
     DB_HOST = 'localhost'
