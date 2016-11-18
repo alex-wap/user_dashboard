@@ -1,5 +1,10 @@
 <html>
 <head>
+	<!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/static/favicon.ico">
+	<!-- CSS -->
 	<link rel="stylesheet" href="/static/css/styles.css" type="text/css">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -21,7 +26,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Test App</a>
+				<a class="navbar-brand" href="#">User Dashboard</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,15 +39,19 @@
 					{% endif %}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/login">Sign in</a></li>
+					{% if session['id']: %}
+						<li><a href="/logout">Log out</a></li>
+					{% else: %}
+						<li><a href="/login">Sign in</a></li>
+					{% endif %}
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Welcome to the Test</h2>
-			<p>We're going to build a cool application using a MVC framework! This application was built using Bootstrap and Pylot.</p>
+			<h2>Welcome to the User Dashboard</h2>
+			<p>This application showcases the MVC framework! This application was built using Bootstrap and <a href='https://github.com/Ketul-Patel/Pylot/tree/development'>Pylot</a>.</p>
 			{% if session['id']: %}
 				<a href="/dashboard"><button class="btn btn-primary">Start</button></a>
 			{% else: %}

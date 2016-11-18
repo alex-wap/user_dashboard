@@ -11,7 +11,7 @@ app = initialize_app()
 
 manager = Manager(app)
 
-manager.add_command('runserver', Server(host='127.0.0.1'))
+manager.add_command('runserver', Server(host='127.0.0.1',port='5001'))
 
 if __name__ == "__main__":
     manager.run()
