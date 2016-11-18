@@ -1,3 +1,10 @@
-# User Dashboard
+## [User Dashboard](http://user-dashboard.alexw.tech/)
 
-This project uses Pylot (MVC Python Framework) and Bootstrap.
+
+User Dashboard is an application that demonstrates the MVC Framework, Bootstrap, and a relational database.
+
+
+## Technology Used:
+
+
+Python, MySQL, Flask, Pylot (MVC Python Framework), Bootstrap, AWS EC2, Git, HTML, CSS
