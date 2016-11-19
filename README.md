@@ -12,5 +12,5 @@ Python, MySQL, Flask, Pylot (MVC Python Framework), Bootstrap, AWS EC2, Git, HTM
 
 ## Screenshots:
 
-![screenshot 1](https://github.com/alex-wap/user-dashboard/blob/master/ss/ud.png "Screenshot 1")
-![screenshot 2](https://github.com/alex-wap/user-dashboard/blob/master/ss/ud2.png "Screenshot 2")
+![screenshot 1](https://github.com/alex-wap/user_dashboard/blob/master/ss/ud.png "Screenshot 1")
+![screenshot 2](https://github.com/alex-wap/user_dashboard/blob/master/ss/ud2.png "Screenshot 2")
