@@ -4,7 +4,7 @@
 User Dashboard is an application that demonstrates an MVC framework, login and registration, validation, Bootstrap, and a relational database.
 
 
-## Technology Used:
+## Technologies Used:
 
 
 Python, MySQL, Flask, Pylot (MVC Python Framework), Bootstrap, AWS EC2, Git, HTML, CSS
