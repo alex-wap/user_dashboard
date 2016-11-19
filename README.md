@@ -1,7 +1,7 @@
 ## [User Dashboard](http://user-dashboard.alexw.tech/)
 
 
-User Dashboard is an application that demonstrates the MVC Framework, Bootstrap, and a relational database.
+User Dashboard is an application that demonstrates an MVC framework, login and registration, validation, Bootstrap, and a relational database.
 
 
 ## Technology Used:
